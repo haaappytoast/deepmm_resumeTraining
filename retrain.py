@@ -30,22 +30,10 @@ def load_params(weight_path, env, ppo):
 def reload_tb(log_dir):
     event_acc = EventAccumulator(log_dir)
     event_acc.Reload()
-    '''
-    Tags: 
-    ['Reward/ball distance', 'Reward/com', 'Reward/contact', 
-    'Reward/end effector', 'Reward/energy efficiency', 'Reward/orientation', 
-    'Reward/reward_sum', 'Reward/velocity', 'Reward/total']
-    '''
     
     first_scalar_tag = event_acc.Tags()['scalars'][0]
     last_iter = event_acc.Scalars(first_scalar_tag)[-1].step
     
     print("\n\nlast time, the tensorboard ended with iteration: ", last_iter, "\n=================\n")
-    # # set agent's iteration to (last_iter) and set previous total_cont
-    # agent.iter = last_iter
-    # agent._reloaded_prev_total_sample_count = int(total_samples / 0.000001)
-    
-    # print("Agent.iter starting from: ", agent.iter + 1)
-    # print("===================================================")
-    # print("\n\n")
-    return
+
+    return int(last_iter)

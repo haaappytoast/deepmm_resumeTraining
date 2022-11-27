@@ -474,8 +474,8 @@ if __name__ == '__main__':
         ppo.critic_optimizer = optim.Adam([*ppo.gpu_model.parameters()], lr = 10 * ppo.lr)
 
         global iteration_number 
-        start_iteration_number = load_params(weight_path, env, ppo)
-        reload_tb(tb_dir)
+        load_params(weight_path, env, ppo)
+        start_iteration_number = reload_tb(tb_dir)
         
     if not(os.path.isdir(ppo.model_name)):
         os.mkdir(ppo.model_name)
